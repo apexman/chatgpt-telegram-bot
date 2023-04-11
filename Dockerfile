@@ -12,3 +12,4 @@ COPY . .
 RUN pip install -r requirements.txt --no-cache-dir
 
 CMD ["python", "bot/main.py"]
+EXPOSE 8080
