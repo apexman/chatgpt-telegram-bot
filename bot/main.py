@@ -14,12 +14,6 @@ def main():
     # Read .env file
     load_dotenv()
 
-    # Setup logging
-    logging.basicConfig(
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        level=logging.INFO
-    )
-
     # Check if the required environment variables are set
     required_values = ['TELEGRAM_BOT_TOKEN', 'OPENAI_API_KEY']
     missing_values = [value for value in required_values if os.environ.get(value) is None]
@@ -85,17 +79,22 @@ def main():
 
 def server():
     web_server = HTTPServer((hostName, serverPort), MyServer)
-    print("Server started http://%s:%s" % (hostName, serverPort))
+    logging.info("Server started http://%s:%s" % (hostName, serverPort))
 
     try:
         web_server.serve_forever()
-    except KeyboardInterrupt:
-        pass
+    except KeyboardInterrupt as e:
+        logging.error(e)
 
     web_server.server_close()
-    print("Server stopped.")
+    logging.info("Server stopped.")
 
 
 if __name__ == '__main__':
+    # Setup logging
+    logging.basicConfig(
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        level=logging.INFO
+    )
     Thread(target=server).start()
     main()
