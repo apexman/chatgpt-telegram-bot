@@ -10,6 +10,6 @@ RUN apk --no-cache add ffmpeg
 WORKDIR /app
 COPY . .
 RUN pip install -r requirements.txt --no-cache-dir
-#EXPOSE 8080
+EXPOSE 80
 
 CMD ["python", "bot/main.py"]
