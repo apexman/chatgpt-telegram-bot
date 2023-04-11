@@ -10,6 +10,6 @@ RUN apk --no-cache add ffmpeg
 WORKDIR /app
 COPY . .
 RUN pip install -r requirements.txt --no-cache-dir
-
-CMD ["python", "bot/main.py"]
 EXPOSE 8080
+
+CMD ["python", "bot/main.py", "-m SimpleHTTPServer 8080"]
